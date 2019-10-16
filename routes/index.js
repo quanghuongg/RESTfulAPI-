@@ -1,9 +1,11 @@
-var express = require('express');
-var router = express.Router();
+let express = require('express');
+let router = express.Router();
+let apiController = require("../controller/ApiController");
+
+let jwtToken = require("../config/passport");
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
-
+router.post('/user/login', apiController.postLogin);
+router.post('/user/register', apiController.postRegister);
+router.get("/me", jwtToken, apiController.getUserInfo);
 module.exports = router;
